@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Makeup Shop</string>
+
+    <string name="no_item_to_show">No item to be shown</string>
+    <string name="price_tag_failed">Price isn\'t available.</string>
+    <string name="category_failed">Category isn\'t available.</string>
+    <string name="brand_failed">Undefined brand.</string>
+    <string name="texture_failed">Undefined texture.</string>
+    <string name="description_failed">No description available.</string>
+    <string name="price_tag">Price: %1$s %2$s</string>
+    <string name="category_label">Category:</string>
+    <string name="brand_label">Brand:</string>
+    <string name="texture_label">Texture:</string>
+    <string name="about_the_product">About the product</string>
+    <string name="open_original_link">Open original link</string>
+    <string name="open_link_content_description">Press the button to open product original link.</string>
+    <string name="add_to_cart_content_description">Press the button to add product to your cart.</string>
+    <string name="open_cart_content_description">Press the button to open your cart.</string>
+    <string name="category_menu_label">Category</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="item_added_to_cart">Item added successfully to cart.</string>
+    <string name="undo">Undo</string>
+    <string name="cart_title">My Cart</string>
+    <string name="total_price">Total: %1$s %2$s</string>
+    <string name="send_order">Send order to another app</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

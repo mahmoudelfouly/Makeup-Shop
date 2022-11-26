@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/makeupListFragment">
+
+    <fragment
+        android:id="@+id/makeupListFragment"
+        android:name="com.melfouly.makeupshop.makeuplist.MakeupListFragment"
+        android:label="Makeup Shop"
+        tools:layout="@layout/fragment_makeup_list">
+        <action
+            android:id="@+id/action_makeupListFragment_to_makeupDetailsFragment"
+            app:destination="@id/makeupDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeupDetailsFragment"
+        android:name="com.melfouly.makeupshop.makeupdetails.MakeupDetailsFragment"
+        android:label="Product Details"
+        tools:layout="@layout/fragment_makeup_details">
+
+        <action
+            android:id="@+id/action_makeupDetailsFragment_to_makeupListFragment"
+            app:destination="@id/makeupListFragment" />
+        <argument
+            android:name="selectedItem"
+            app:argType="com.melfouly.makeupshop.model.MakeupItem" />
+        <action
+            android:id="@+id/action_makeupDetailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.melfouly.makeupshop.makeupcart.CartFragment"
+        android:label="My Cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_makeupDetailsFragment"
+            app:destination="@id/makeupDetailsFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="makeupItem"
+            type="com.melfouly.makeupshop.model.MakeupItem" />
+
+        <variable
+            name="clickListener"
+            type="com.melfouly.makeupshop.makeupcart.CartAdapter.CartItemClickListener" />
+
+        <variable
+            name="viewModel"
+            type="com.melfouly.makeupshop.makeupcart.CartViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cart_card_item"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/primary"
+        android:onClick="@{() -> clickListener.onClick(makeupItem)}"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="6">
+
+            <ImageView
+                android:id="@+id/item_image"
+                loadImage="@{makeupItem}"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/aclonica"
+                android:gravity="center"
+                android:text="@{makeupItem.name}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="Item name" />
+
+
+            <TextView
+                android:id="@+id/item_price"
+                loadPrice="@{makeupItem}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/aclonica"
+                android:gravity="center"
+                android:textColor="@color/black"
+                tools:text="5$" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.deleteItemFromCart(makeupItem)}"
+                app:icon="@drawable/ic_baseline_delete_outline_24"
+                app:iconGravity="end" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
