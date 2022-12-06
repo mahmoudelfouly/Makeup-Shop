@@ -20,5 +20,11 @@ data class MakeupItem(
     val description: String?,
     @SerializedName("product_link")
     val productLink: String?
-    ): Serializable
+) : Serializable
+
+fun MakeupItemEntity.asDomainModel(): MakeupItem {
+    return MakeupItem(
+        id, name, image, price, priceSign, brand, category, texture, description, productLink
+    )
+}
 

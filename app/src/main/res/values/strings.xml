@@ -22,7 +22,10 @@
     <string name="undo">Undo</string>
     <string name="cart_title">My Cart</string>
     <string name="total_price">Total: %1$s %2$s</string>
-    <string name="send_order">Send order to another app</string>
+    <string name="share_cart">Share</string>
+    <string name="share_details">Item name: %1$s \nItem link: %2$s</string>
+    <string name="share_subject">My Makeup Cart</string>
+    <string name="list_is_empty">List is empty, Nothing to share.</string>
     <string name="cancel">Cancel</string>
 
 </resources>

@@ -57,13 +57,14 @@ class MakeupListViewModel(application: Application) : AndroidViewModel(applicati
         _detailedItem.value = null
     }
 
-    // Filter receyclerView by chosen category.
+    // Filter recyclerView by chosen category.
     fun filterByCategory(category: String) {
         viewModelScope.launch {
             if (category == "All") {
                 _makeupList.value = repository.getMakeupList()
             } else {
-                _makeupList.value = repository.getMakeupListByCategory(category.lowercase())
+                _makeupList.value =
+                    repository.getMakeupListByCategory(category.lowercase().replace(" ", "_"))
             }
         }
     }

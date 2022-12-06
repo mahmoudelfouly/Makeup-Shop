@@ -8,14 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.melfouly.makeupshop.databinding.CartListItemBinding
 import com.melfouly.makeupshop.model.MakeupItem
 
-class CartAdapter(private val clickListener: CartItemClickListener) :
+class CartAdapter(
+    private val cartItemClickListener: CartItemClickListener,
+    private val deleteItemClickListener: DeleteItemClickListener
+) :
     ListAdapter<MakeupItem, CartAdapter.CartViewHolder>(DiffCallback()) {
 
     class CartViewHolder(private val binding: CartListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(makeupItem: MakeupItem, clickListener: CartItemClickListener) {
+        fun bind(
+            makeupItem: MakeupItem,
+            cartItemClickListener: CartItemClickListener,
+            deleteItemClickListener: DeleteItemClickListener
+        ) {
             binding.makeupItem = makeupItem
-            binding.clickListener = clickListener
+            binding.cartItemClickListener = cartItemClickListener
+            binding.deleteItemClickListener = deleteItemClickListener
             binding.executePendingBindings()
         }
     }
@@ -28,7 +36,7 @@ class CartAdapter(private val clickListener: CartItemClickListener) :
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val makeupItem = getItem(position)
-        holder.bind(makeupItem, clickListener)
+        holder.bind(makeupItem, cartItemClickListener, deleteItemClickListener)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<MakeupItem>() {
@@ -45,4 +53,9 @@ class CartAdapter(private val clickListener: CartItemClickListener) :
         fun onClick(makeupItem: MakeupItem) = clickListener(makeupItem)
     }
 
+    class DeleteItemClickListener(val deleteItemClickListener: (makeupItem: MakeupItem) -> Unit) {
+        fun onClick(makeupItem: MakeupItem) = deleteItemClickListener(makeupItem)
+    }
+
 }
+

@@ -1,8 +1,6 @@
 package com.melfouly.makeupshop.data.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.melfouly.makeupshop.makeupcart.CartAdapter
 
 @Dao
 interface MakeupDao {
@@ -27,7 +25,7 @@ interface MakeupDao {
     suspend fun deleteAll()
 
     /**
-     * Cart item table methods.
+     * Cart items table methods.
      */
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

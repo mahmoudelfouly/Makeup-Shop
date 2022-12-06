@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:backgroundTint="@color/pink"
-        android:text="@string/send_order"
+        android:text="@string/share_cart"
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textStyle="bold"

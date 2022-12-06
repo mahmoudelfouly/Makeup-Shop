@@ -11,6 +11,8 @@ import com.melfouly.makeupshop.data.database.LocalDb
 import com.melfouly.makeupshop.model.MakeupItem
 import kotlinx.coroutines.launch
 
+private const val TAG = "CartViewModel"
+
 class CartViewModel(application: Application): AndroidViewModel(application) {
     private val repository = LocalRepository(LocalDb.createMakeupDao(application))
 
@@ -21,6 +23,9 @@ class CartViewModel(application: Application): AndroidViewModel(application) {
     val detailedItem: LiveData<MakeupItem?> get() = _detailedItem
 
     init {
+        /**
+         * Gets the cartList from the repository getAllCartItems method and save it as liveData.
+         */
         viewModelScope.launch {
             _cartList.value = repository.getAllCartItems()
         }
@@ -39,7 +44,9 @@ class CartViewModel(application: Application): AndroidViewModel(application) {
     // Delete item from cart's db.
     fun deleteItemFromCart(makeupItem: MakeupItem) {
         viewModelScope.launch {
+            Log.d(TAG, "DeleteItemFromCart method in viewModel called")
             repository.deleteItemFromCart(makeupItem)
+            _cartList.value = repository.getAllCartItems()
         }
     }
 }

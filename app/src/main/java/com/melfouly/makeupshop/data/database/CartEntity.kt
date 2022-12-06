@@ -11,7 +11,8 @@ data class CartEntity(
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "image_url") val image: String?,
     @ColumnInfo(name = "price") val price: String?,
-    @ColumnInfo(name = "price_sign") val priceSign: String?
+    @ColumnInfo(name = "price_sign") val priceSign: String?,
+    @ColumnInfo(name = "product_link") val productLink: String?
 )
 
 fun MakeupItem.asDatabaseCartModel(): CartEntity {
@@ -21,6 +22,7 @@ fun MakeupItem.asDatabaseCartModel(): CartEntity {
         image = this.image,
         price = this.price,
         priceSign = this.priceSign,
+        productLink = this.productLink
     )
 }
 
@@ -34,7 +36,7 @@ fun List<CartEntity>.asDomainCartModel(): List<MakeupItem> {
             priceSign = it.priceSign,
             category = null,
             texture = null,
-            productLink = null,
+            productLink = it.productLink,
             brand = null,
             description = null
         )

@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.107" />
+        <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/drawable/ic_launcher_background.xml" value="0.107" />
+        <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/layout-land/fragment_makeup_list.xml" value="0.18959435626102292" />
+        <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/layout-port/fragment_makeup_list.xml" value="0.22395833333333334" />
         <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/layout/activity_main.xml" value="0.225" />
         <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/layout/cart_list_item.xml" value="0.22" />
         <entry key="..\:/Android Developer/AndroidStudioProjects/MakeupShop/app/src/main/res/layout/category_menu_item.xml" value="0.225" />

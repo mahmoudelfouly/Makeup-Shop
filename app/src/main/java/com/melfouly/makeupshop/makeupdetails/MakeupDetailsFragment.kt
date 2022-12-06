@@ -3,7 +3,6 @@ package com.melfouly.makeupshop.makeupdetails
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,24 +28,31 @@ class MakeupDetailsFragment : Fragment() {
         binding = FragmentMakeupDetailsBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val makeupItem = MakeupDetailsFragmentArgs.fromBundle(requireArguments()).selectedItem
-        Log.d("list", "Details of ${makeupItem.id}")
+        // Getting id of makeupItem from args and put it in detailedItem liveData.
+        val makeupItemId = MakeupDetailsFragmentArgs.fromBundle(requireArguments()).selectedItem
+        viewModel.getItemById(makeupItemId)
 
-        binding.makeupItem = makeupItem
+        viewModel.detailedItem.observe(viewLifecycleOwner) {
+            binding.makeupItem = it
+        }
 
+        // Once originalLinkButton clicked open apps that can view the link.
         binding.originalLinkButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(makeupItem.productLink))
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.detailedItem.value!!.productLink))
             startActivity(intent)
         }
 
+        // Once addToCartButton clicked save item to db and show a snackbar.
         binding.addToCartButton.setOnClickListener {
-            viewModel.saveItemToCart(makeupItem.asDatabaseCartModel())
-            Snackbar.make(binding.root, R.string.item_added_to_cart, Snackbar.LENGTH_LONG)
+            viewModel.saveItemToCart(viewModel.detailedItem.value!!.asDatabaseCartModel())
+            Snackbar.make(binding.root, R.string.item_added_to_cart, Snackbar.LENGTH_SHORT)
                 .setAction(R.string.undo) {
-                    viewModel.deleteItemFromCart(makeupItem)
+                    viewModel.deleteItemFromCart(viewModel.detailedItem.value!!)
                 }.show()
         }
 
+        // Once cartFab clicked navigate to cartFragment.
         binding.cartFab.setOnClickListener {
             this.findNavController()
                 .navigate(MakeupDetailsFragmentDirections.actionMakeupDetailsFragmentToCartFragment())

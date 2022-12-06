@@ -32,13 +32,16 @@ class MakeupListFragment : Fragment() {
         // Inflate the layout for this fragment.
         binding = FragmentMakeupListBinding.inflate(inflater)
 
+        // Get selectedCategoryPosition from savedInstanceState.
         if (savedInstanceState != null) {
             selectedCategoryPosition = savedInstanceState.getInt("selectedCategoryPosition")
         }
 
+        // Setting category adapter ready.
         categoryAdapter =
             ArrayAdapter(requireActivity(), R.layout.category_menu_item, categoryList)
 
+        // Setting category autoCompleteTextView.
         binding.autoComplete.run {
             setAdapter(categoryAdapter)
             setText(categoryAdapter.getItem(selectedCategoryPosition), false)
@@ -118,6 +121,8 @@ class MakeupListFragment : Fragment() {
         })
         binding.recyclerview.adapter = adapter
 
+        // Adjust adapter observer to position the screen to first item in the
+        // recyclerView after refreshing.
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 binding.recyclerview.scrollToPosition(0)
@@ -139,7 +144,7 @@ class MakeupListFragment : Fragment() {
             item?.let {
                 this.findNavController().navigate(
                     MakeupListFragmentDirections.actionMakeupListFragmentToMakeupDetailsFragment(
-                        it
+                        it.id
                     )
                 )
                 Log.d(TAG, "Observing ${it.id}")
@@ -147,37 +152,20 @@ class MakeupListFragment : Fragment() {
             }
         }
 
+        // Once cartFab clicked navigate to cartFragment.
+        binding.cartFab.setOnClickListener {
+            this.findNavController()
+                .navigate(MakeupListFragmentDirections.actionMakeupListFragmentToCartFragment())
+        }
+
         return binding.root
     }
 
+    // Save the selectedCategoryPosition in a bundle.
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("selectedCategoryPosition", selectedCategoryPosition)
     }
 
-
-    /*override fun onResume() {
-        super.onResume()
-        categoryAdapter =
-            ArrayAdapter(requireContext(), R.layout.category_menu_item, categoryList)
-        binding.autoComplete.setAdapter(categoryAdapter)
-
-        binding.autoComplete.setOnItemClickListener { parent, view, position, id ->
-            when (position) {
-                0 -> viewModel.filterByCategory(categoryList[0])
-                1 -> viewModel.filterByCategory(categoryList[1])
-                2 -> viewModel.filterByCategory(categoryList[2])
-                3 -> viewModel.filterByCategory(categoryList[3])
-                4 -> viewModel.filterByCategory(categoryList[4])
-                5 -> viewModel.filterByCategory(categoryList[5])
-                6 -> viewModel.filterByCategory(categoryList[6])
-                7 -> viewModel.filterByCategory(categoryList[7])
-                8 -> viewModel.filterByCategory(categoryList[8])
-                9 -> viewModel.filterByCategory(categoryList[9])
-                10 -> viewModel.filterByCategory(categoryList[10])
-                11 -> viewModel.filterByCategory(categoryList[11])
-            }
-        }
-    }*/
 
 }

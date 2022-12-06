@@ -4,6 +4,7 @@ import android.util.Log
 import com.melfouly.makeupshop.data.database.*
 import com.melfouly.makeupshop.data.network.Network
 import com.melfouly.makeupshop.model.MakeupItem
+import com.melfouly.makeupshop.model.asDomainModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -15,23 +16,24 @@ class LocalRepository(
     private val makeupDao: MakeupDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    // Transfer items from db to be liveData from model items
+    // Transfer items from db to be liveData from model items.
     suspend fun getMakeupList(): MutableList<MakeupItem> = withContext(ioDispatcher) {
         return@withContext makeupDao.getAllItems().shuffled().toMutableList().asDomainModel()
     }
 
-    // Get makeupItem by Id
-    fun getMakeupItemById(id: Long) {
-        makeupDao.getItemById(id)
+    // Get makeupItem by Id.
+    suspend fun getMakeupItemById(id: Long): MakeupItem = withContext(ioDispatcher) {
+        return@withContext makeupDao.getItemById(id).asDomainModel()
     }
 
+    // Filter makeupList by Category.
     suspend fun getMakeupListByCategory(category: String): MutableList<MakeupItem> =
         withContext(ioDispatcher) {
             return@withContext makeupDao.getItemsByCategory(category).shuffled().toMutableList()
                 .asDomainModel()
         }
 
-    // Take response from the network and save the items in db
+    // Take response from the network and save the items in db.
     suspend fun saveMakeupListIntoDb() = withContext(ioDispatcher) {
         try {
             val makeupList: List<MakeupItem>
@@ -62,8 +64,8 @@ class LocalRepository(
     }
 
     // Get all cart items from db.
-    suspend fun getAllCartItems() = withContext(ioDispatcher) {
-            makeupDao.getAllCartItems().asDomainCartModel()
+    suspend fun getAllCartItems(): List<MakeupItem> = withContext(ioDispatcher) {
+        makeupDao.getAllCartItems().asDomainCartModel()
     }
 
     // Delete certain item from cart.

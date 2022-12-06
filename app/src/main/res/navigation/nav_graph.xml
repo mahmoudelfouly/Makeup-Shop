@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_makeupListFragment_to_makeupDetailsFragment"
             app:destination="@id/makeupDetailsFragment" />
+        <action
+            android:id="@+id/action_makeupListFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/makeupDetailsFragment"
@@ -25,7 +28,7 @@
             app:destination="@id/makeupListFragment" />
         <argument
             android:name="selectedItem"
-            app:argType="com.melfouly.makeupshop.model.MakeupItem" />
+            app:argType="long" />
         <action
             android:id="@+id/action_makeupDetailsFragment_to_cartFragment"
             app:destination="@id/cartFragment" />

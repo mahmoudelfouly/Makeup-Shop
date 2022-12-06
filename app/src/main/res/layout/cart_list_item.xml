@@ -10,12 +10,12 @@
             type="com.melfouly.makeupshop.model.MakeupItem" />
 
         <variable
-            name="clickListener"
+            name="cartItemClickListener"
             type="com.melfouly.makeupshop.makeupcart.CartAdapter.CartItemClickListener" />
 
         <variable
-            name="viewModel"
-            type="com.melfouly.makeupshop.makeupcart.CartViewModel" />
+            name="deleteItemClickListener"
+            type="com.melfouly.makeupshop.makeupcart.CartAdapter.DeleteItemClickListener" />
 
     </data>
 
@@ -25,7 +25,7 @@
         android:layout_height="100dp"
         android:layout_margin="4dp"
         android:backgroundTint="@color/primary"
-        android:onClick="@{() -> clickListener.onClick(makeupItem)}"
+        android:onClick="@{() -> cartItemClickListener.onClick(makeupItem)}"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
@@ -37,9 +37,9 @@
             <ImageView
                 android:id="@+id/item_image"
                 loadImage="@{makeupItem}"
-                android:layout_gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 tools:src="@tools:sample/avatars" />
@@ -73,7 +73,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="@{() -> viewModel.deleteItemFromCart(makeupItem)}"
+                android:onClick="@{() -> deleteItemClickListener.onClick(makeupItem)}"
                 app:icon="@drawable/ic_baseline_delete_outline_24"
                 app:iconGravity="end" />
 
