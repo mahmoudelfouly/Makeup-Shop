@@ -11,8 +11,6 @@ import com.melfouly.makeupshop.data.database.LocalDb
 import com.melfouly.makeupshop.model.MakeupItem
 import kotlinx.coroutines.launch
 
-private const val TAG = "MakeupDetailsViewModel"
-
 class MakeupDetailsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = LocalRepository(LocalDb.createMakeupDao(application))
 

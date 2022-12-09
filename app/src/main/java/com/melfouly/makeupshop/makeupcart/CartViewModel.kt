@@ -1,7 +1,6 @@
 package com.melfouly.makeupshop.makeupcart
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,9 +10,7 @@ import com.melfouly.makeupshop.data.database.LocalDb
 import com.melfouly.makeupshop.model.MakeupItem
 import kotlinx.coroutines.launch
 
-private const val TAG = "CartViewModel"
-
-class CartViewModel(application: Application): AndroidViewModel(application) {
+class CartViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = LocalRepository(LocalDb.createMakeupDao(application))
 
     private val _cartList = MutableLiveData<List<MakeupItem>>()
@@ -44,7 +41,6 @@ class CartViewModel(application: Application): AndroidViewModel(application) {
     // Delete item from cart's db.
     fun deleteItemFromCart(makeupItem: MakeupItem) {
         viewModelScope.launch {
-            Log.d(TAG, "DeleteItemFromCart method in viewModel called")
             repository.deleteItemFromCart(makeupItem)
             _cartList.value = repository.getAllCartItems()
         }

@@ -1,7 +1,6 @@
 package com.melfouly.makeupshop.makeuplist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.melfouly.makeupshop.R
 import com.melfouly.makeupshop.databinding.FragmentMakeupListBinding
 import com.melfouly.makeupshop.model.FilterLists.categoryList
-
-private const val TAG = "MakeupListFragment"
 
 class MakeupListFragment : Fragment() {
 
@@ -107,7 +104,6 @@ class MakeupListFragment : Fragment() {
         // that the page refreshed successfully.
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refreshList()
-            Log.d(TAG, "RefreshList called in fragment")
             binding.refreshLayout.isRefreshing = false
             Toast.makeText(requireActivity(), "Page refreshed successfully", Toast.LENGTH_SHORT)
                 .show()
@@ -117,7 +113,6 @@ class MakeupListFragment : Fragment() {
         // in viewModel
         adapter = MakeupAdapter(MakeupAdapter.MakeupItemClickListener { makeupItem ->
             viewModel.onMakeupItemClicked(makeupItem)
-            Log.d(TAG, "Item id saved is: ${makeupItem.id}")
         })
         binding.recyclerview.adapter = adapter
 
@@ -147,7 +142,6 @@ class MakeupListFragment : Fragment() {
                         it.id
                     )
                 )
-                Log.d(TAG, "Observing ${it.id}")
                 viewModel.doneNavigating()
             }
         }

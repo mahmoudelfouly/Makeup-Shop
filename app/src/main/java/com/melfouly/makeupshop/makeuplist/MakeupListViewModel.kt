@@ -1,7 +1,6 @@
 package com.melfouly.makeupshop.makeuplist
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,8 +9,6 @@ import com.melfouly.makeupshop.data.LocalRepository
 import com.melfouly.makeupshop.data.database.LocalDb
 import com.melfouly.makeupshop.model.MakeupItem
 import kotlinx.coroutines.launch
-
-private const val TAG = "MakeupListViewModel"
 
 class MakeupListViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = LocalRepository(LocalDb.createMakeupDao(application))
@@ -33,7 +30,6 @@ class MakeupListViewModel(application: Application) : AndroidViewModel(applicati
                 _makeupList.value = repository.getMakeupList()
                 repository.saveMakeupListIntoDb()
             } catch (e: Exception) {
-                Log.e(TAG, "Error in init: ${e.localizedMessage}")
             }
         }
     }
@@ -43,7 +39,6 @@ class MakeupListViewModel(application: Application) : AndroidViewModel(applicati
     fun refreshList() {
         viewModelScope.launch {
             _makeupList.value = _makeupList.value?.toMutableList()?.shuffled()?.toList()
-            Log.d(TAG, "RefreshList called in viewModel")
         }
     }
 
